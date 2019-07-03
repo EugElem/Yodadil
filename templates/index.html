@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--Добавляю загрузку ститических файдов -->
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- в link указываю путь на ститические файлы -->
+    <link rel="stylesheet" href="{% static "css/index.css" %}" />
+    <title>Поиск препарата</title>
+</head>
+<body class="container">
+    <form method="POST" action="create/" class="formPost">
+        {% csrf_token %}
+        <p>
+            <label>Введите название препарата</label><br>
+            <input type="text" name="search" />
+            <input type="submit"class="button" value="Искать" >
+        </p>
+    </form>
+
+    <form method="BACK" action="back/">
+        {% csrf_token %}
+
+        <input type="submit" class="button" value="Очистить список" >
+    </form>
+
+    <form method="SAVE" action="save/">
+        {% csrf_token %}
+
+        <input type="submit" class="button" value="Добавить в список" >
+        <label class="mess" hidden>Препарат сохранен</label><br>
+    </form>
+
+
+
+
+
+
+    {% if preparat.count > 0 %}
+
+    <h2>Список позиций</h2>
+    <form>
+        <label><h2>Не забудьте выбрать Ваш город на странице заказа</h2></label>
+
+    <table>
+
+        <tr><th class="text">Препарат</th><th></th><th>Цена</th>
+            <th class="text">Аптечная сеть</th><!-- <th class="text">Ссылка</th> --></tr>
+
+        {% for position in preparat %}
+
+            <tr class="tr_1"><th class="text">{{position.product}}</th>
+                <th></th><th>{{ position.price }}</th><th>{{ position.net }}</th>
+                <th class="text"><!-- <a href="{{ position.link }}">{{ position.link }}</a> -->
+                    <form method="POST" action="buy/">
+                    {% csrf_token %}
+                        <input  type="text" name="link" value = "{{ position.link }}">
+                        <input type="submit" name="buyClick" class="button" value="Заказать">
+                    </form>
+
+                </th></tr>
+        {% endfor %}
+
+    </table>
+    </form>
+
+    {% endif %}
+
+    <br>
+    <br>
+
+
+
+
+    <form method="getlist" action="getlist/">
+        {% csrf_token %}
+
+        <input type="submit" class="button" value="Показать список" >
+        <label class="mess" hidden>Препарат сохранен</label><br>
+
+        {% if preparat.count > 0 %}
+
+        <h2>Список позиций</h2>
+        <form>
+            <label><h2>Не забудьте выбрать Ваш город на странице заказа</h2></label>
+
+        <table>
+
+            <tr><th class="text">Препарат</th><th></th><th>Цена</th>
+                <th class="text">Аптечная сеть</th><!-- <th class="text">Ссылка</th> --></tr>
+
+            {% for position in preparat %}
+
+                <tr class="tr_1"><th class="text">{{position.product}}</th>
+                    <th></th><th>{{ position.price }}</th><th>{{ position.net }}</th>
+                    <th class="text"><!-- <a href="{{ position.link }}">{{ position.link }}</a> -->
+
+                    </th></tr>
+            {% endfor %}
+
+        </table>
+        </form>
+
+    {% endif %}
+
+    </form>
+
+</body>
+</html>

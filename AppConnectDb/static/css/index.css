@@ -1,0 +1,20 @@
+.container{
+    margin: 20px;
+    display: flex; /* элементы либо в столбец либо в строку*/
+    flex-direction: column; /* */
+    background-color: gainsboro;
+}
+
+.button{
+    background-color: lightgray;
+}
+
+.tr_1{
+    background-color: #c2c2c2;
+    margin: 5px;
+    border-color: gainsboro;
+}
+
+.text{
+    text-align: left;
+}
