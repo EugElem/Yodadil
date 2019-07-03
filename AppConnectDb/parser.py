@@ -106,7 +106,7 @@ def pars(url_path, cookieList, search_drug, counter):
 
     n1 = search_drug # поисковый запрос
     url_single = url + path+ n1 # получение строки для поиска
-    #print('url_single: ', url_single)
+    print('url_single: ', url_single)
     w =0
     w = s.get(url=url_single, headers=headers, cookies=cookies) # получение куков
 
